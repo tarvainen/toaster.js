@@ -45,6 +45,25 @@ Of course you can also show and hide the toast manually using `toaster.show()` a
     window.addEventListener('keydown', function () {
         toaster.hide();
     });
+    
+### Customizing the toast
+By default the toast contains two HTML elements: the wrapper and the toast itself. The wrapper is covering the whole view and it is useful for making some kind of transparent cover for the whole page. The wrapper div has an id `#toaster-wrapper` so by using the id you are able to change the appearance of the wrapper.
+
+The toast itself is just an `<p></p>` element and it has an id `#toaster-textnode`. By using that id you are able to change the appearance of the textnode of toaster.js.
+
+For example, in your own `css` define next rules.
+
+    #toaster-wrapper {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    #toaster-textnode {
+        padding: 5px;
+        border-radius: 5px;
+        background: rgba(80, 80, 80, 0.9);
+    }
+    
+The toast is made visible by adding the `.toaster-visible` class name to the both `wrapper` and the `textnode`. On the other hand the toast is hidden by replacing the `.toaster-visible` with `.toaster-hidden`. Knowing that you are able to for example animate your toast.
 
 ### All methods
 
