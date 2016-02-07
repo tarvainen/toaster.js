@@ -19,7 +19,10 @@ var toaster = (function () {
         }
 
         this.timeout = -1;
-        this.opts = {};
+        this.opts = {
+            text: '',
+            duration: 2000
+        };
         this.events = {};
 
         createDocuments();
@@ -39,33 +42,25 @@ var toaster = (function () {
 
     Toaster.prototype.makeText = function (text, type, duration, callback) {
         var that = this;
-        text = text || '';
-        type = type || this.default;
+        var opts = {};
+        opts.text = text || this.opts.text || '';
+        opts.type = type || this.opts.type || this.success;
 
-        this.textNode.innerHTML = text;
+        opts.duration = duration || this.opts.duration || 2000;
 
-        this.opts.duration = duration || this.opts.duration;
-        this.show(callback);
-
-        if (typeof type == 'function') {
-            type.call(this);
-        }
-
-        if (typeof duration == 'function') {
-            duration.call(this);
-        } else if (typeof duration == 'number') {
-            this.opts.duration = duration;
-        }
+        this.show(opts, callback);
     }
 
     Toaster.prototype.reset = function () {
         this.textNode.innerHTML = '';
-        this.opts.duration = 2000;
-        this.opts.type = this.success;
     }
 
-    Toaster.prototype.show = function (callback) {
+    Toaster.prototype.show = function (opts, callback) {
         var that = this;
+        opts = opts || {};
+
+        this.textNode.innerHTML = opts.text;
+
         this.timeout = setTimeout(function () {
             that.hide();
             that.reset();
@@ -74,10 +69,15 @@ var toaster = (function () {
             if (typeof callback == 'function') {
                 callback.call(that);
             }
-        }, that.opts.duration || 1000);
+        }, opts.duration || that.opts.duration || 2000);
 
         this.textNode.className = 'toaster-visible';
         this.container.className = 'toaster-visible';
+
+        if (typeof opts.type == 'function') {
+            opts.type.call(this);
+        }
+        
         this.emitEvent('show');
     }
 
@@ -104,7 +104,7 @@ var toaster = (function () {
     Toaster.prototype.long = 5000;
 
     Toaster.prototype.defineMessageType = function (type, term) {
-        Toaster.prototype[type] = callback;
+        Toaster.prototype[type] = term;
     }
 
     Toaster.prototype.defineMessageLength = function (name, length) {

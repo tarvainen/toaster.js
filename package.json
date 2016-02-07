@@ -1,0 +1,19 @@
+{
+  "name": "toaster.js",
+  "version": "1.0.0",
+  "description": "The super simple customizable client side message displayer.",
+  "main": "toaster.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tarvainen/toaster.js.git"
+  },
+  "author": "Atte Tarvainen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tarvainen/toaster.js/issues"
+  },
+  "homepage": "https://github.com/tarvainen/toaster.js#readme"
+}
