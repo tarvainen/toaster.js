@@ -51,10 +51,6 @@ var toaster = (function () {
         this.show(opts, callback);
     }
 
-    Toaster.prototype.reset = function () {
-        this.textNode.innerHTML = '';
-    }
-
     Toaster.prototype.show = function (opts, callback) {
         var that = this;
         opts = opts || {};
@@ -63,7 +59,6 @@ var toaster = (function () {
 
         this.timeout = setTimeout(function () {
             that.hide();
-            that.reset();
             that.emitEvent('hide');
 
             if (typeof callback == 'function') {
@@ -77,7 +72,7 @@ var toaster = (function () {
         if (typeof opts.type == 'function') {
             opts.type.call(this);
         }
-        
+
         this.emitEvent('show');
     }
 
