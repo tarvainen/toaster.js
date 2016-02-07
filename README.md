@@ -77,9 +77,6 @@ added to the element. There you can define what will be done to the elements (fo
 
 You can define `type` variables to the toaster.js for easier use by using the `toaster.defineMessageType (type, term)` function.
 
-#### toaster.reset ()
-Sets all the parameters to the default values. Is automatically called after every toast if `toaster.opts.remember` flag is set to false.
-
 #### toaster.show ()
 Sets the toaster visible.
 
